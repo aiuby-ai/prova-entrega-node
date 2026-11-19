@@ -1,0 +1,6 @@
+const test = require('node:test')
+const assert = require('node:assert')
+const { handler } = require('../app')
+const call = (url) => new Promise((resolve) => { const res = { writeHead: (s) => { res.status = s }, end: (b) => resolve({ status: res.status, body: b }) }; handler({ url }, res) })
+test('healthz responde ok', async () => { const r = await call('/healthz'); assert.strictEqual(r.status, 200); assert.strictEqual(r.body, 'ok') })
+test('raiz devolve a versão', async () => { const r = await call('/'); assert.strictEqual(JSON.parse(r.body).app, 'prova-entrega') })

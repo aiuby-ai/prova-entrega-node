@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "on": { "push": { "branches": ["main"] }, "pull_request": {} },
+  "stages": [
+    { "name": "test", "image": "node22", "steps": [{ "name": "unit", "run": "mkdir -p reports && npm test" }], "reports": { "junit": ["reports/junit.xml"] } },
+    { "name": "image", "needs": ["test"], "when": { "events": ["push"] }, "steps": [{ "name": "build", "type": "image_build", "repository": "prova-entrega", "image": "node", "tags": ["main"] }] },
+    { "name": "scan", "needs": ["image"], "when": { "events": ["push"] }, "steps": [{ "name": "trivy", "type": "image_scan", "from": "image", "failOn": "critical" }] }
+  ]
+}

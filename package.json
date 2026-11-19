@@ -1,0 +1,2 @@
+{ "name": "prova-entrega-node", "version": "1.0.0", "private": true, "type": "commonjs",
+  "scripts": { "start": "node server.js", "test": "node --test --test-reporter=junit --test-reporter-destination=reports/junit.xml test/" } }
