@@ -5,3 +5,4 @@ const handler = (req, res) => {
   res.end(JSON.stringify({ app: 'prova-entrega', version: VERSION }))
 }
 module.exports = { handler, VERSION }
+// prova do Check Run
